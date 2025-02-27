@@ -59,3 +59,15 @@ fi
 # 添加编译日期
 sed -i 's/IMG_PREFIX:=/IMG_PREFIX:=$(BUILD_DATE_PREFIX)-/g' ./include/image.mk
 sed -i '/DTS_DIR:=$(LINUX_DIR)/a\BUILD_DATE_PREFIX := $(shell date +'%F')' ./include/image.mk
+
+# ROOter拨号
+git clone --single-branch https://github.com/ofmodemsandmen/ROOterSource2305.git newver
+cp -rf newver/package/rooter package
+cp -rf newver/package/rooter-extra package
+cp -rf newver/package/rooter-custom-builds package
+cp -rf newver/package/rooter-builds package
+
+echo "
+CONFIG_PACKAGE_ext-rooter-basic=y
+CONFIG_PACKAGE_ext-sms=y
+" >> .config
